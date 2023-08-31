@@ -1,0 +1,42 @@
+button {
+  margin: 10px 0;
+  width: 150px;
+  height: 45px;
+  font-size: 1.25rem;
+  display: block;
+  display: inline-block;
+}
+
+body {
+    background-color: #EFEFEF;
+}
+
+#mandateBar {
+  width: 300px; /* dobbel bredde av knappene */
+  position: relative;
+  margin-left: 50px; /* fast avstand fra knappene */
+  border: 1px solid #333;
+}
+
+.flertallMarker {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: black;
+}
+
+#contentContainer {
+    display: flex;
+    align-items: start;
+}
+
+
+#partyButtons {
+  
+}
+
+#partyButtons button {
+    overflow: hidden; /* hindrer innhold fra å gå utenfor knappen */
+    white-space: nowrap; /* hindrer teksten i knappen fra å bryte over flere linjer */
+    text-overflow: ellipsis; /* viser '...' hvis teksten er for lang for knappen */
+}
