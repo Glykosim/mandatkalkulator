@@ -16,7 +16,6 @@ body {
   width: 300px; /* dobbel bredde av knappene */
   height: 100px;
   position: relative;
-  margin-left: 50px; /* fast avstand fra knappene */
   border: 1px solid #333;
 }
 
