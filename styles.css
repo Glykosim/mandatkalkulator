@@ -1,6 +1,6 @@
 button {
   margin: 10px 5px;
-  width: 150px;
+  width: 120px;
   height: 45px;
 border-radius: 5px;
 font-size: 1.25rem;
@@ -13,10 +13,11 @@ body {
 }
 
 #mandateBar {
-  width: 300px; /* dobbel bredde av knappene */
+  width: 240px; /* dobbel bredde av knappene */
   height: 100px;
   position: relative;
   border: 1px solid #333;
+  margin: 10px;
 }
 
 .flertallMarker {
