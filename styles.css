@@ -50,7 +50,9 @@ h2 {
 
 
 #partyButtons {
-  
+    display: flex;
+    flex-wrap: wrap; /* tillater linjeskift for knapper hvis det er mange av dem */
+    justify-content: center; /* midtstiller knappene horisontalt */
 }
 
 #partyButtons button {
