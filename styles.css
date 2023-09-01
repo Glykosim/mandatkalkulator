@@ -1,6 +1,6 @@
 button {
   margin: 10px 5px;
-  width: 120px;
+  width: 100px;
   height: 45px;
 border-radius: 5px;
 font-size: 1.25rem;
@@ -13,12 +13,14 @@ body {
 }
 
 #mandateBar {
-  width: 240px; /* dobbel bredde av knappene */
-  height: 100px;
+  height: 400px;
+  width: 90px;
   position: relative;
   border: 1px solid #333;
   margin: 10px;
+  background-color: #F2EBDD;
 }
+
 
 .flertallMarker {
   position: absolute;
@@ -27,10 +29,24 @@ body {
   background-color: black;
 }
 
-#contentContainer {
-    display: flex;
-    align-items: start;
+h2 {
+    background-color: green;  /* Legger til en grønn bakgrunn */
+    color: white;  /* Endrer tekstfargen til hvit for bedre kontrast mot den grønne bakgrunnen */
+    padding: 5px 0;  /* Gir litt vertikal avstand mellom teksten og kantene av rektangelet */
+    margin: 0;  /* Fjerner standard marger for h2-elementer for å unngå uønsket avstand */
+    text-align: center;  /* Sentrerer teksten i rektangelet */
 }
+
+
+#container {
+    display: flex;
+    flex-direction: column;  /* Endrer retningen fra rad til kolonne */
+    align-items: center;     /* Dette vil horisontalt midtstille innholdet */
+    width: 100%;             /* Dette vil sørge for at containeren strekker seg over hele skjermens bredde */
+}
+
+
+
 
 
 #partyButtons {
@@ -41,4 +57,28 @@ body {
     overflow: hidden; /* hindrer innhold fra å gå utenfor knappen */
     white-space: nowrap; /* hindrer teksten i knappen fra å bryte over flere linjer */
     text-overflow: ellipsis; /* viser '...' hvis teksten er for lang for knappen */
+}
+
+.confetti {
+  position: fixed;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  z-index: 9999;
+  opacity: 1;
+  pointer-events: none; /* for å unngå forstyrrelser med andre elementer */
+ transform-origin: center;
+    animation: fall 2s linear forwards, fadeOut 2s 1.5s forwards;
+}
+
+/* Animasjonene */
+@keyframes fall {
+    to {
+        transform: translate(var(--xOffset), var(--yOffset));
+    }
+}
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+  }
 }
