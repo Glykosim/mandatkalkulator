@@ -52,7 +52,7 @@ h2 {
     font-family: Arial, sans-serif; /* Arial font med en fallback til en hvilken som helst sans-serif font */
     background-color: green;
 	text-align: center;         /* Sentrerer teksten horisontalt */
-    font-size: 1.3rem;          /* Øker skriftstørrelsen. Juster '1.5rem' etter ønske */
+    font-size: 1.0rem;          /* Øker skriftstørrelsen. Juster '1.5rem' etter ønske */
     background-color: #539760;    /* Gir samme grønne bakgrunn som overskriften */
     color: white;               /* Gjør teksten hvit for kontrast mot den grønne bakgrunnen */
     padding: 5px 0;             /* Gir litt vertikal avstand mellom teksten og kantene av rektangelet */
