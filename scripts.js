@@ -118,7 +118,7 @@ function updateMandateBar() {
     let flertallLabel = document.createElement("div");
     flertallLabel.innerHTML = `Flertall ved ${majorityMandates} mandat`;
     flertallLabel.style.position = "absolute";
-    flertallLabel.style.bottom = `${flertallPercentage - 3}%`;  // litt over flertallsmarkeringen
+    flertallLabel.style.bottom = `${flertallPercentage - 5}%`;  // litt over flertallsmarkeringen
     flertallLabel.style.left = "105%";  // litt til høyre for søylen
     flertallLabel.style.fontSize = "0.8rem";
 

@@ -46,7 +46,14 @@ h2 {
 }
 
 
-
+#majorityStatus {
+    text-align: center;         /* Sentrerer teksten horisontalt */
+    font-size: 1.5rem;          /* Øker skriftstørrelsen. Juster '1.5rem' etter ønske */
+    background-color: green;    /* Gir samme grønne bakgrunn som overskriften */
+    color: white;               /* Gjør teksten hvit for kontrast mot den grønne bakgrunnen */
+    padding: 5px 0;             /* Gir litt vertikal avstand mellom teksten og kantene av rektangelet */
+    margin-top: 20px;           /* Gir litt avstand mellom denne teksten og elementet over, juster etter ønske */
+}
 
 
 #partyButtons {
