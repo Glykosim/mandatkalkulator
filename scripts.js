@@ -125,15 +125,24 @@ function updateMandateBar() {
     mandateBar.appendChild(flertallLabel);
 
   const status = document.getElementById("majorityStatus");
-  if (selectedTotalMandates >= majorityMandates) {
-    status.textContent = `Sammensetningen av partiene "${selectedParties.map(p => p.name).join('+')}" gir flertall!`;
-	launchConfetti();
+  
+  if (selectedParties.length === 0) {
+    // Ingen partier er valgt
+    status.textContent = "";
+	 status.style.display = "none";
   } else {
-    const diff = majorityMandates - selectedTotalMandates;
-    if (selectedParties.length === 1) {
-      status.textContent = `${selectedParties[0].name} kan ikke styre alene, det mangler ${diff} mandat for flertall.`;
-    } else {
-      status.textContent = `Partiene ${selectedParties.map(p => p.name).join('+')} kan ikke styre alene, de mangler ${diff} mandater for flertall.`;
-    }
+	  status.style.display = "block";
+	  
+	  if (selectedTotalMandates >= majorityMandates) {
+		status.textContent = `Sammensetningen av partiene "${selectedParties.map(p => p.name).join('+')}" gir flertall!`;
+		launchConfetti();
+	  } else {
+		const diff = majorityMandates - selectedTotalMandates;
+		if (selectedParties.length === 1) {
+		  status.textContent = `${selectedParties[0].name} kan ikke styre alene, det mangler ${diff} mandat for flertall.`;
+		} else {
+		  status.textContent = `Partiene ${selectedParties.map(p => p.name).join('+')} kan ikke styre alene, de mangler ${diff} mandat for flertall.`;
+		}
+	  }
   }
 }
