@@ -29,6 +29,7 @@ updateMandateBar();
     }
 
     updateMandateBar();
+	updateResetButtonDisplay(); 
   };
 
   document.getElementById("partyButtons").appendChild(btn);
@@ -63,12 +64,49 @@ function launchConfetti() {
 }
 
 
+const mandateBar = document.getElementById("mandateBar");
+
+document.getElementById("partyButtons").addEventListener('click', function(event) {
+  if (event.target.tagName === 'BUTTON') {
+    const btn = event.target;
+    
+	 // Sjekk om knappen allerede er trykket
+    if (btn.classList.contains('pressed')) {
+      // Knappen er allerede trykket. Ikke gjør noe.
+      return;
+    }
+	
+	   // Marker knappen som trykket
+    btn.classList.toggle('pressed');
+	
+	
+    // Klon knappen
+    const clonedBtn = btn.cloneNode(true);
+    document.body.appendChild(clonedBtn);
+    
+    // Plasser den klonede knappen over den originale knappen
+    const rect = btn.getBoundingClientRect();
+    clonedBtn.style.top = rect.top + "px";
+    clonedBtn.style.left = rect.left + "px";
+    clonedBtn.classList.add('floatingBtn');
+    
+    // Få posisjonen til mandateBar
+    const mandateBarRect = mandateBar.getBoundingClientRect();
+    
+    // Flytt den klonede knappen til mandateBar posisjonen
+    setTimeout(() => {
+      clonedBtn.style.top = mandateBarRect.top + "px";
+      clonedBtn.style.left = (mandateBarRect.left + mandateBarRect.width/2 - clonedBtn.offsetWidth/2) + "px";
+
+      // Etter at animasjonen er ferdig, fjern den klonede knappen
+      clonedBtn.addEventListener('transitionend', () => {
+        document.body.removeChild(clonedBtn);
+      });
+    }, 10); // Liten forsinkelse for å sikre at animasjonen spiller riktig
+  }
+});
 
 
-// const buttonHeight = 45; // Høyden av en knapp som definert i CSS
-// const buttonMargin = 10; // Margin definert i CSS (topp og bunn)
-// const totalButtonHeight = parties.length * (buttonHeight + 2*buttonMargin); // Total høyde = antall knapper * (høyde + 2*margin)
-// document.getElementById('mandateBar').style.height = `${totalButtonHeight}px`;
 
 function getRandomColor() {
   // Hent alle farger fra de valgte partiene
@@ -81,6 +119,51 @@ function getRandomColor() {
 
   return colors[Math.floor(Math.random() * colors.length)];
 }
+
+
+// Funksjon som oppdaterer visningen av nullstill-knappen
+function updateResetButtonDisplay() {
+    const buttons = document.querySelectorAll('#partyButtons button.pressed');
+    const resetButton = document.getElementById("resetButton");
+    
+    if (buttons.length > 0) {
+        resetButton.style.display = 'block'; // Vis knappen
+    } else {
+        resetButton.style.display = 'none';  // Skjul knappen
+    }
+}
+
+// Kall denne funksjonen hver gang en partiknapp trykkes på.
+document.querySelectorAll('#partyButtons button').forEach(button => {
+    button.addEventListener('click', updateResetButtonDisplay);
+});
+
+
+document.getElementById("resetButton").addEventListener('click', function() {
+    // Nullstiller alle partiknapper
+    const buttons = document.querySelectorAll('#partyButtons button');
+    buttons.forEach(btn => btn.classList.remove('pressed'));
+    
+    // Tømmer mandateBar
+    // Antar at du allerede har en funksjon eller logikk for å nullstille/tømme denne.
+    // Hvis ikke, så trenger du å legge til logikken her.
+    
+    // Tømmer resultatfeltet
+    const status = document.getElementById("majorityStatus");
+    status.textContent = '';
+    status.style.backgroundColor = "transparent";
+	
+	selectedParties = [];
+	buttons.forEach(btn => {
+    btn.style.opacity = '1';  // Tilbakestill opasiteten
+    btn.classList.remove('pressed');  // Fjern "pressed"-statusen
+	updateMandateBar();
+	 updateResetButtonDisplay();  // Legg til denne linjen
+});
+	
+});
+
+
 
 
 function updateMandateBar() {
@@ -118,9 +201,9 @@ function updateMandateBar() {
     let flertallLabel = document.createElement("div");
     flertallLabel.innerHTML = `Flertall ved ${majorityMandates} mandat`;
     flertallLabel.style.position = "absolute";
-    flertallLabel.style.bottom = `${flertallPercentage - 5}%`;  // litt over flertallsmarkeringen
+    flertallLabel.style.bottom = `${flertallPercentage - 7}%`;  // litt over flertallsmarkeringen
     flertallLabel.style.left = "105%";  // litt til høyre for søylen
-    flertallLabel.style.fontSize = "0.8rem";
+    flertallLabel.style.fontSize = "0.9rem";
 
     mandateBar.appendChild(flertallLabel);
 
@@ -134,14 +217,14 @@ function updateMandateBar() {
 	  status.style.display = "block";
 	  
 	  if (selectedTotalMandates >= majorityMandates) {
-		status.textContent = `Sammensetningen av partiene "${selectedParties.map(p => p.name).join('+')}" gir flertall!`;
+		status.textContent = `Sammensetningen "${selectedParties.map(p => p.name).join('+')}" gir flertall!`;
 		launchConfetti();
 	  } else {
 		const diff = majorityMandates - selectedTotalMandates;
 		if (selectedParties.length === 1) {
 		  status.textContent = `${selectedParties[0].name} kan ikke styre alene, det mangler ${diff} mandat for flertall.`;
 		} else {
-		  status.textContent = `Partiene ${selectedParties.map(p => p.name).join('+')} kan ikke styre alene, de mangler ${diff} mandat for flertall.`;
+		  status.textContent = `${selectedParties.map(p => p.name).join(' + ')} kan ikke styre alene, de mangler ${diff} mandat for flertall.`;
 		}
 	  }
   }
