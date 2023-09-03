@@ -217,6 +217,7 @@ function updateMandateBar() {
 	  status.style.display = "block";
 	  
 	  if (selectedTotalMandates >= majorityMandates) {
+<<<<<<< HEAD
 		status.textContent = `Sammensetningen "${selectedParties.map(p => p.name).join('+')}" gir flertall!`;
 		launchConfetti();
 	  } else {
