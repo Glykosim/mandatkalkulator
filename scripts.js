@@ -1,7 +1,5 @@
 let selectedParties = [];
-
 parties.sort((a, b) => b.mandates - a.mandates);
-
 // Generer knapper basert på config.js data
 parties.forEach(party => {
   let btn = document.createElement("button");
@@ -10,8 +8,7 @@ parties.forEach(party => {
   if (party.txtColor) {
     btn.style.color = party.txtColor;
   }
-  
-    if (party.secondaryColor) {
+  if (party.secondaryColor) {
     btn.style.background = `linear-gradient(90deg, ${party.color} 0%, ${party.color} 40%, ${party.secondaryColor} 60%, ${party.secondaryColor} 100%)`;
   } else {
     btn.style.backgroundColor = party.color;
@@ -27,13 +24,23 @@ updateMandateBar();
       selectedParties.push(party);
       btn.style.opacity = '0.5';
     }
-
     updateMandateBar();
-	updateResetButtonDisplay(); 
+	updateResetButtonVisibility(); 
   };
-
   document.getElementById("partyButtons").appendChild(btn);
 });
+
+
+function updateResetButtonVisibility() {
+    // Hvis det totale antall mandater er 0, skjul nullstill-knappen
+    if (totalMandates === 0) {
+        resetButton.style.display = 'none';
+    } else {
+        resetButton.style.display = 'block';
+    }
+}
+
+
 
 function launchConfetti() {
   for (let i = 0; i < 100; i++) { 
@@ -158,7 +165,8 @@ document.getElementById("resetButton").addEventListener('click', function() {
     btn.style.opacity = '1';  // Tilbakestill opasiteten
     btn.classList.remove('pressed');  // Fjern "pressed"-statusen
 	updateMandateBar();
-	 updateResetButtonDisplay();  // Legg til denne linjen
+    updateResetButtonVisibility();
+
 });
 	
 });
@@ -217,7 +225,6 @@ function updateMandateBar() {
 	  status.style.display = "block";
 	  
 	  if (selectedTotalMandates >= majorityMandates) {
-<<<<<<< HEAD
 		status.textContent = `Sammensetningen "${selectedParties.map(p => p.name).join('+')}" gir flertall!`;
 		launchConfetti();
 	  } else {
