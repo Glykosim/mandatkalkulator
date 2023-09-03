@@ -127,22 +127,9 @@ function getRandomColor() {
   return colors[Math.floor(Math.random() * colors.length)];
 }
 
-
-// Funksjon som oppdaterer visningen av nullstill-knappen
-function updateResetButtonDisplay() {
-    const buttons = document.querySelectorAll('#partyButtons button.pressed');
-    const resetButton = document.getElementById("resetButton");
-    
-    if (buttons.length > 0) {
-        resetButton.style.display = 'block'; // Vis knappen
-    } else {
-        resetButton.style.display = 'none';  // Skjul knappen
-    }
-}
-
 // Kall denne funksjonen hver gang en partiknapp trykkes på.
 document.querySelectorAll('#partyButtons button').forEach(button => {
-    button.addEventListener('click', updateResetButtonDisplay);
+    button.addEventListener('click', updateResetButtonVisibility);
 });
 
 
@@ -170,9 +157,6 @@ document.getElementById("resetButton").addEventListener('click', function() {
 });
 	
 });
-
-
-
 
 function updateMandateBar() {
   const totalMandates = parties.reduce((acc, party) => acc + party.mandates, 0);
